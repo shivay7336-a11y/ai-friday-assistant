@@ -89,4 +89,5 @@ MIT License - See LICENSE file for details
 
 ---
 
-**Made with ❤️ for productive Fridays!**
+**Made
+ with ❤️ for productive Fridays!**
