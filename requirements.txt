@@ -1,1 +1,2 @@
 # Core dependencies
+pyttsx3==2.90
