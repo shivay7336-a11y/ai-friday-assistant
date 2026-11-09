@@ -91,3 +91,44 @@ MIT License - See LICENSE file for details
 
 **Made
  with ❤️ for productive Fridays!**
+
+name: Python CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          if [ -f requirements.txt ]; then
+            python -m pip install -r requirements.txt
+          fi
+
+      - name: Check Python syntax
+        run: python -m compileall -q .
+
+      - name: Run tests if available
+        run: |
+          if find . -type f \( -name "test_*.py" -o -name "*_test.py" \) | grep -q .; then
+            python -m pip install pytest
+            python -m pytest -q
+          else
+            echo "No tests found; skipping."
+          fi
+
